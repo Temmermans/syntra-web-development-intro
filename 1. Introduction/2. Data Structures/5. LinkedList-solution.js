@@ -1,92 +1,115 @@
-/** Class representing a Linked List */
+/*
+  LinkedList
+  
+  Name your class / constructor (something you can call new on) LinkedList
+  
+  LinkedList is made by making nodes that have two properties, the value that's being stored and a pointer to
+  the next node in the list. The LinkedList then keep track of the head and usually the tail (I would suggest
+  keeping track of the tail because it makes pop really easy.) As you may have notice, the unit tests are the
+  same as the ArrayList; the interface of the two are exactly the same and should make no difference to the
+  consumer of the data structure.
+  
+  length - integer  - How many elements in the list
+  push   - function - accepts a value and adds to the end of the list
+  pop    - function - removes the last value in the list and returns it
+  get    - function - accepts an index and returns the value at that position
+  delete - function - accepts an index, removes value from list, collapses, 
+                      and returns removed value
+                      
+  I would suggest making a second class, a Node class. However that's up to you how you implement it. A Node
+  has two properties, value and next.
+
+  As always, you can change describe to xdescribe to prevent the unit tests from running while
+  you work
+*/
 
 class LinkedList {
-  constructor(value) {
-    this.head = { value, next: null };
-    this.tail = this.head;
+  constructor() {
+    this.tail = this.head = null;
+    this.length = 0;
   }
-  /*
-   * Inserts a new value to the end of the linked list
-   * @param {*} value - the value to insert
-   */
-  insert(value) {
-    const node = { value, next: null };
-    this.tail.next = node;
+  push(value) {
+    const node = new Node(value);
+    this.length++;
+    if (!this.head) {
+      this.head = node;
+    } else {
+      this.tail.next = node;
+    }
     this.tail = node;
   }
-  /*
-   * Deletes a node
-   * @param {*} node - the node to remove
-   * @return {*} value - the deleted node's value
-   */
-  remove() {}
-  /*
-   * Removes the value at the end of the linked list
-   * @return {*} - the removed value
-   */
-  // {
-  //   head: {value: 1, next: {value: 2, next: null}}
-  //   tail: {value: 2, next: null}
-  // }
-  removeTail() {
-    let currentNode = this.head;
-    while (currentNode.next !== this.tail) {
-      currentNode = currentNode.next;
+  pop() {
+    if (!this.head) return null;
+    if (this.head === this.tail) {
+      const node = this.head;
+      this.head = this.tail = null;
+      return node.value;
     }
-    currentNode.next = null;
-    this.tail = currentNode;
+    const penultimate = this._find(null, (value, nodeValue, i, current) => current.next === this.tail);
+    const ans = penultimate.next.value;
+    penultimate.next = null;
+    this.tail = penultimate;
+    this.length--;
+    return ans;
   }
-  /*
-   * Searches the linked list and returns true if it contains the value passed
-   * @param {*} value - the value to search for
-   * @return {boolean} - true if value is found, otherwise false
-   */
-  contains(value) {
-    let currentNode = this.head;
-    while (currentNode.value !== value) {
-      currentNode = currentNode.next;
+  _find(value, test = this.test) {
+    let current = this.head;
+    let i = 0;
+    while (current) {
+      if (test(value, current.value, i, current)) {
+        return current;
+      }
+      current = current.next;
+      i++;
     }
-    return currentNode.value === value;
+    return null;
   }
-  /*
-   * Checks if a node is the head of the linked list
-   * @param {{prev:Object|null, next:Object|null}} node - the node to check
-   * @return {boolean} - true if node is the head, otherwise false
-   */
-  isHead(node) {
-    return node === this.head;
+  get(index) {
+    const node = this._find(index, this.testIndex);
+    if (!node) return null;
+    return node.value;
   }
-  /*
-   * Checks if a node is the tail of the linked list
-   * @param {{prev:Object|null, next:Object|null}} node - the node to check
-   * @return {boolean} - true if node is the tail, otherwise false
-   */
-  isTail(node) {
-    return node === this.tail;
+  delete(index) {
+    if (index === 0) {
+      const head = this.head;
+      if (head) {
+        this.head = head.next;
+      } else {
+        this.head = null;
+      }
+      this.length--;
+      return head.value;
+    }
+
+    const node = this._find(index - 1, this.testIndex);
+    const excise = node.next;
+    if (!excise) return null;
+    node.next = excise.next;
+    if (!node.next.next) this.tail = node.next;
+    this.length--;
+    return excise.value;
+  }
+  test(search, nodeValue) {
+    return search === nodeValue;
+  }
+  testIndex(search, __, i) {
+    return search === i;
+  }
+  serialize() {
+    const ans = [];
+    let current = this.head;
+    if (!current) return ans;
+    while (current) {
+      ans.push(current.value);
+      current = current.next;
+    }
+    return ans;
   }
 }
 
-const myList = new LinkedList(1); //initiate?
-
-// {
-//   head: {value: 1, next: null}
-//   tail: {value: 1, next: null}
-// }
-
-myList.insert(2);
-
-// {
-//   head: {value: 1, next: {value: 2, next: null}}
-//   tail: {value: 2, next: null}
-// }
-
-myList.insert(3);
-
-// {
-//   head: {value: 1, next: {value: 2, next: {value: 3, next: null}}}
-//   tail: {value: 3, next: null}
-// }
-console.log(myList);
-myList.removeTail();
-console.log(myList);
-myList.removeNext(prevNode);
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
