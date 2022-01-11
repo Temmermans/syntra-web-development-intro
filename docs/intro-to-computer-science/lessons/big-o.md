@@ -1,10 +1,3 @@
----
-layout: "jekyll-theme-cayman"
-title: "Big O Complexity"
-order: "2A"
-permalink: /big-o-complexity
----
-
 ## Big O Complexity
 
 Big O is the way we analyze how efficient algorithms are (or code in this case) without getting too mired in the details. We can model how much time any function is going to take given n inputs (think an array of length `n`), but in reality we're interested in the order of magnitude of the number and not necessarily of the exact figure.
@@ -75,7 +68,7 @@ This would be O(1) because no matter how long the array is, this still takes the
 
 For some people, it's helpful to use a graph to visualize what we're talking about here
 
-![Big O](./static/big-o.png)
+![Big O](../../static/big-o.png)
 
 Here we see a graph that represents the more items we put in a array, how long does it take for the function to complete. The red graph represnts O(1) like our `getMiddleOfArary` function. You can throw an array of 1,000,000 at it and it still takes the same amount of time as if the array was 10 big.
 

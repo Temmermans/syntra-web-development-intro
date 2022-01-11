@@ -1,13 +1,3 @@
----
-path: "/recursion"
-title: "Recursion"
-order: "5A"
-section: "Recursive Sorts"
-description: "What is recursion"
-icon: "sitemap"
-layout: "jekyll-theme-cayman"
----
-
 What do you do if you have a large, difficult-to-solve problem? You break it down into multiple smaller problems and see if you can solve those. Are those problems still too big? Break those down into smaller problems, and so-on-and-so-forth until you arrive at a problem you can solve.
 
 Logically, this is similar to what we do with code some times. What if we need to sort a really big array? In some algorithms we'll break that really big array into two smaller arrays, and we'll break those arrays into two yet smaller lists until we have a list of one which is by-definition already sorted (we just described merge sort, we'll write that later in this course!)

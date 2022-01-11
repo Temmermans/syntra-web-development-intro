@@ -1,10 +1,3 @@
----
-layout: "jekyll-theme-cayman"
-title: "Landing Page"
-order: "1A"
-permalink: /
----
-
 # Syntra Web Development
 
 ## Getting started
@@ -16,5 +9,6 @@ permalink: /
 
 Let's get started!
 
-- [Big O Complexity](BIGO.md)
-- [Big O Complexity Reference](BIGO-REFERENCE.md)
+- [Intro to Computer Science](/intro-to-computer-science/README)
+- [Intro to React](/intro-to-react/README)
+- [Intro to Express](/intro-to-express/README)

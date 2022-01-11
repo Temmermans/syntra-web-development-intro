@@ -1,22 +1,11 @@
-console.log("~~~~~~~~~~~~~~TASK 1~~~~~~~~~~~~~~");
-// And create a couple of products
-let p1 = new Product("vacuum cleaner Bosch", 100);
-let p1_replace = new Product("vacuum cleaner Borscht ", 50);
-let p2 = new Product("pencil fancy", 3);
-let p2_replace = new Product("pencil crappy", 1);
-let p3 = new Product("bike", 300);
-let p3_replace = new Product("scruffy bike", 150);
-
 /**
  * Create a shopping cart class to add products
  */
-console.log("~~~~~~~~~~~~~~TASK 2~~~~~~~~~~~~~~");
+console.log("~~~~~~~~~~~~~~TASK 1~~~~~~~~~~~~~~");
 class ShoppingCart {
   constructor() {
-    this.products = []; // empty at first
-    this.products_mirror = this.products; //it should be updated with this.products, or?
+    this.products = [];
     this.total_price = 0;
-    this.total_price_mirror = this.total_price;
     this.no_discount_price = 0;
     this.discount = 0;
     this.global_count = {};
@@ -43,8 +32,40 @@ class ShoppingCart {
 /**
  * Add products to the cart
  */
-console.log("~~~~~~~~~~~~~~TASK 3~~~~~~~~~~~~~~");
+console.log("~~~~~~~~~~~~~~TASK 2~~~~~~~~~~~~~~");
 let cart = new ShoppingCart();
 cart.addProduct(p1);
 cart.addProduct(p2);
 cart.addProduct(p3);
+
+/**
+ * Create a calculator class using a fluent API
+ * that does something like this:
+ * calc
+    .add(1, 2)
+    .square()
+    .display();
+ */
+console.log("~~~~~~~~~~~~~~TASK 3~~~~~~~~~~~~~~");
+class Calculator {
+  total;
+
+  constructor(start) {
+    this.total = start || 0;
+  }
+
+  add(x, y) {
+    this.total = this.total + (x + y);
+    return this;
+  }
+
+  square() {
+    this.total = this.total * this.total;
+    return this;
+  }
+
+  display() {
+    console.log(this.total);
+    return this.total;
+  }
+}
