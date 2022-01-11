@@ -10,6 +10,7 @@
   - [What is NodeJS?](intro-to-express/lessons/what-is-nodejs.md)
   - [What is Express?](intro-to-express/lessons/what-is-express.md)
   - [Express Middleware](intro-to-express/lessons/express-middleware.md)
+  - [Express Authentication](intro-to-express/lessons/express-authentication.md)
 
 - Further Reading
 
