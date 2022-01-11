@@ -2,10 +2,11 @@
 
 Let's get started!
 
-- [Big O](lessons/big-o.md)
-- [Big O Reference](lessons/big-o-reference.md)
-- [Classes](lessons/classes.md)
+- [Big O](intro-to-computer-science/lessons/big-o.md)
+- [Big O Reference](intro-to-computer-science/lessons/big-o-reference.md)
+- [Classes](intro-to-computer-science/lessons/classes.md)
 - Data Structures
-  - [Markdown configuration](markdown.md)
-  - [Language highlighting](language-highlight.md)
-  - [Linked List](lessons/linkedlist.md)
+  - [Stacks and Queues](intro-to-computer-science/lessons/stacks-queues.md)
+  - [Linked List](intro-to-computer-science/lessons/linkedlist.md)
+  - [Hash Tables](intro-to-computer-science/lessons/hashtable.md)
+  - [Bloom Filters](intro-to-computer-science/lessons/bloom-filters.md)
