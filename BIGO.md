@@ -75,7 +75,7 @@ This would be O(1) because no matter how long the array is, this still takes the
 
 For some people, it's helpful to use a graph to visualize what we're talking about here
 
-![Big O](./images/big-o.png)
+![Big O](./static/big-o.png)
 
 Here we see a graph that represents the more items we put in a array, how long does it take for the function to complete. The red graph represnts O(1) like our `getMiddleOfArary` function. You can throw an array of 1,000,000 at it and it still takes the same amount of time as if the array was 10 big.
 
@@ -84,8 +84,6 @@ The blue line represents a function that takes longer based on how many items ar
 The green line is where we get start getting scary. For every item we add to the array, it takes exponentially more time to complete the operation. Adding 10x the items could cause a function to takes 100x longer since it's O(n²). It gets even scarier at O(n³) as it would take 1000x longer.
 
 We'll get more into it later, but you can also have O(log n) if a code employs a divide-and-conquer strategy (often recursive,) meaning as you add more terms, the increases in time as you add input diminishes. We'll talk more about that with merge and quick sort.
-
-![log n graph](./images/graph-log.png)
 
 Notice the purple line we added. Now as we add more terms to the array, it takes less and less time because the function can make some use of some tricks to take shortcuts. We'll dig into these later in the course.
 
