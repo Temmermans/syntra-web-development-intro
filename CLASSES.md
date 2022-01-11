@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: "jekyll-theme-cayman"
 title: "Classes in Javascript"
 order: "4A"
 permalink: /classes-in-js

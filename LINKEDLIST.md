@@ -4,6 +4,7 @@ title: "LinkedList"
 order: "1B"
 section: "Data Structures"
 description: ""
+layout: "jekyll-theme-cayman"
 ---
 
 <video controls autoplay loop><source src="https://btholt.github.io/complete-intro-to-computer-science/linkedlist-480.webm" type="video/webm"></video>

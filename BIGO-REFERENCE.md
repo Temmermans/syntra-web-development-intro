@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: "jekyll-theme-cayman"
 title: "Big O Complexity Reference"
 order: "3A"
 permalink: /big-o-complexity-reference
