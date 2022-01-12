@@ -32,6 +32,6 @@ console.log("~~~~~~~~~~~~~~TASK 3~~~~~~~~~~~~~~");
 class Calculator {}
 
 /**
- * Create a class with methods to communicate with the firebase API
+ * Create a CRUD class for the crud operations you have been doing in the react course
  */
 console.log("~~~~~~~~~~~~~~TASK 4~~~~~~~~~~~~~~");

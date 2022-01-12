@@ -2,7 +2,7 @@
 
 class Stack {
   constructor() {
-    this._storage = {};
+    this._storage = [];
   }
   /*
    * Adds a new value at the end of the stack

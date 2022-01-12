@@ -4,7 +4,7 @@
 
 class Queue {
   constructor() {
-    this._storage = {};
+    this._storage = [];
   }
   /*
    * Enqueues a new value at the end of the queue
