@@ -1,3 +1,23 @@
+//Task: Write a function to make this array unique using loops
+const isUnique = (arr) => {
+  let result = true;
+
+  for (let i = 0; i < arr.length; i++) {
+    console.log(`~~~~ OUTER LOOP ~~~~ i === ${i}`);
+
+    for (let j = 0; j < arr.length; j++) {
+      console.log(`~~~~ INNER LOOP ~~~~ j === ${j}`);
+      if (i !== j && arr[i] === arr[j]) {
+        result = false;
+      }
+    }
+  }
+
+  return result;
+};
+
+//Task: Transform this function to use only one loop
+
 const isUnique = (arr) => {
   const breadcrumbs = {};
   let result = true;
