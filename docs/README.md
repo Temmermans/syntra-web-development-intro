@@ -5,7 +5,8 @@
 1. Install nodejs from this site: [Node.JS](https://nodejs.org/en/)
 2. Install VS Code from this site: [VS Code](https://code.visualstudio.com/download)
 3. Install Github Desktop from here: [Github Desktop](https://desktop.github.com/)
-4. Clone the github repo from [here](https://github.com/Temmermans/syntra-web-development-intro)
+4. Install Postman from here: [Postman](https://www.postman.com/downloads/)
+5. Clone the github repo from [here](https://github.com/Temmermans/syntra-web-development-intro)
 
 Let's get started!
 
