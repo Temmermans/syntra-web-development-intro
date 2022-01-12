@@ -38,6 +38,23 @@ Even as the value gets bigger, you simply divide it by 2 and see whether it retu
 // 2. Are You Here?
 
 function areYouHere(arr1, arr2) {
+  let foundAll = true;
+
+  for (let [index, itemFromArray1] of arr1) {
+    if (!arr2.includes(itemFromArray1)) {
+      foundAll = false;
+      break;
+    }
+  }
+
+  return foundAll;
+}
+
+function areYouHere2(arr1, arr2) {
+  return arr1.every((itemFromArray1) => arr2.includes(itemFromArray1));
+}
+
+function areYouHere3(arr1, arr2) {
   for (let i = 0; i < arr1.length; i++) {
     const el1 = arr1[i];
     for (let j = 0; j < arr2.length; j++) {
