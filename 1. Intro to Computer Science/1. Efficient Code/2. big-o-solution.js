@@ -1,11 +1,12 @@
 /**
  * Write a function that prints every even number of a list of numbers
+ * O(N / 2)
  */
 
-function print_even_numbers() {
+function print_even_numbers(arr) {
   let number = 2;
 
-  while (number <= 100) {
+  while (number <= arr.length) {
     console.log(number);
 
     number += 2;
