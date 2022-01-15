@@ -8,5 +8,6 @@
 - Lessons
 
   - [Intro to Computer Science](/intro-to-computer-science/README)
+  - [Vanilla Javascript](/vanilla-javascript/README)
   - [Intro to React](/intro-to-react/README)
   - [Intro to Express](/intro-to-express/README)
