@@ -1,56 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>JS Reference VS Copy</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Reference VS Copy</title>
+  </head>
+  <body>
+    <script>
+      // start with strings, numbers and booleans
 
-  <script>
-    // start with strings, numbers and booleans
+      // Let's say we have an array
+      const players = ["Wes", "Sarah", "Ryan", "Poppy"];
 
-    // Let's say we have an array
-    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+      // and we want to make a copy of it.
+      // You might think we can just do something like this:
 
-    // and we want to make a copy of it.
+      // however what happens when we update that array?
 
-    // You might think we can just do something like this:
+      // now here is the problem!
+      // oh no - we have edited the original array too!
 
-    // however what happens when we update that array?
+      // Why? It's because that is an array reference, not an array copy. They both point to the same array!
 
-    // now here is the problem!
+      // So, how do we fix this? We take a copy instead!
 
-    // oh no - we have edited the original array too!
+      // one way
 
-    // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+      // or create a new array and concat the old one in
 
-    // So, how do we fix this? We take a copy instead!
+      // or use the new ES6 Spread
 
-    // one way
+      // now when we update it, the original one isn't changed
 
-    // or create a new array and concat the old one in
+      // The same thing goes for objects, let's say we have a person object
 
-    // or use the new ES6 Spread
+      // with Objects
+      const person = {
+        name: "Wes Bos",
+        age: 80,
+      };
 
-    // now when we update it, the original one isn't changed
+      // and think we make a copy:
 
-    // The same thing goes for objects, let's say we have a person object
+      // how do we take a copy instead?
 
-    // with Objects
-    const person = {
-      name: 'Wes Bos',
-      age: 80
-    };
+      // ...spread
 
-    // and think we make a copy:
-
-    // how do we take a copy instead?
-
-    // We will hopefully soon see the object ...spread
-
-    // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
-
-  </script>
-
-</body>
+      // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    </script>
+  </body>
 </html>
