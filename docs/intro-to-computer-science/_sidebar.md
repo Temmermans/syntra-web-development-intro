@@ -19,3 +19,4 @@
 
   - [Level Up Your Core Programming Skills](https://www.amazon.nl/Common-Sense-Guide-Data-Structures-Algorithms/dp/1680507222/ref=asc_df_1680507222/?tag=nlshogostdde-21&linkCode=df0&hvadid=454743612456&hvpos=&hvnetw=g&hvrand=18182143489403045599&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9040053&hvtargid=pla-917825050002&psc=1)
   - [Declarative vs Imperative](https://codeburst.io/declarative-vs-imperative-programming-a8a7c93d9ad2)
+  - [Big O Explained](https://www.freecodecamp.org/news/my-first-foray-into-technology-c5b6e83fe8f1/)
