@@ -19,3 +19,7 @@
   - [Shift and Checkboxes](/vanilla-javascript/lessons/checkboxes.md)
   - [Speech Detection](/vanilla-javascript/lessons/speech-detection.md)
   - [Slide on Scroll](/vanilla-javascript/lessons/slide-on-scroll.md)
+
+- Further Reading
+
+  - [Caniuse](https://caniuse.com/)
