@@ -10,6 +10,14 @@
 4. Install Postman from here: [Postman](https://www.postman.com/downloads/)
 5. Clone the github repo from [here](https://github.com/Temmermans/syntra-web-development-intro)
 
+## The overview
+
+Web development is vast, too much to see in one course. This learning path can help to position the concepts you learn about.
+
+![Frontend](./static/frontend.png)
+![Backend](./static/backend.png)
+![DevOps](./static/devops.png)
+
 Let's get started!
 
 - [Intro to Computer Science](/intro-to-computer-science/README)
