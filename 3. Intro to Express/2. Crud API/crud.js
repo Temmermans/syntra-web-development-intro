@@ -2,7 +2,15 @@ const { initializeApp } = require("firebase/app");
 const { getDatabase, ref, set, get, child, remove } = require("firebase/database");
 const uuidv4 = require("uuid").v4;
 
-const firebaseConfig = {};
+const firebaseConfig = {
+  apiKey: "AIzaSyBIzmLdNDEHznOGDjNYDLNkgcI3y9Cs1RU",
+  authDomain: "syntra-countries.firebaseapp.com",
+  databaseURL: "https://syntra-countries-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "syntra-countries",
+  storageBucket: "syntra-countries.appspot.com",
+  messagingSenderId: "116938610047",
+  appId: "1:116938610047:web:facc12a9a8961a9613f64a",
+};
 
 const app = initializeApp(firebaseConfig);
 

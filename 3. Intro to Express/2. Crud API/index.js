@@ -3,7 +3,7 @@ const express = require("express");
 const HttpError = require("./errors/HttpError");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./docs/swagger.json");
-const { readItem, readAll, writeItem } = require("./crud");
+const { readItem, readAll, writeItem, removeItem } = require("./crud");
 
 dotenv.config();
 
@@ -15,7 +15,14 @@ api.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 // if you want to use req.body
 api.use(express.json());
 
-api.delete("/country/:id", (req, res, next) => {});
+api.delete("/country/:id", (req, res, next) => {
+  const id = req.params.id;
+  return removeItem(id)
+    .then((val) => {
+      res.status(200).json({ message: `${id} deleted.` });
+    })
+    .catch((err) => next(new HttpError(500, err.message)));
+});
 
 api.put("/country", (req, res, next) => {});
 
