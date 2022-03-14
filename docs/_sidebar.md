@@ -11,6 +11,8 @@
   - [Vanilla Javascript](/vanilla-javascript/README)
   - [Intro to React](/intro-to-react/README)
   - [Intro to Express](/intro-to-express/README)
+  - [Intro to Testing](/intro-to-testing/README)
+  - [Integrated Exercise](/integrated-exercise/README)
 
 - Further Reading
 
