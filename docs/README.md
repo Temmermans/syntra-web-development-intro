@@ -24,3 +24,6 @@ Let's get started!
 - [Vanilla Javascript](/vanilla-javascript/README)
 - [Intro to React](/intro-to-react/README)
 - [Intro to Express](/intro-to-express/README)
+- [Intro to Testing](/intro-to-testing/README)
+- [Deployment Options](/deployment-options/README)
+- [Integrated Exercise](/integrated-exercise/README)
