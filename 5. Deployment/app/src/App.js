@@ -9,6 +9,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+        <h1>This is new</h1>
         {picker}
         {(() => {
           if (!selectedUrl) return <p>YOU GOTTA SELECT YO 💩</p>;
