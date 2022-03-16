@@ -2,8 +2,8 @@
 
 - Deployment Options
 
-  - [Vercel](/integrated-exercise/walkthrough/practicals.md)
-  - [Firebase](/integrated-exercise/walkthrough/requirements.md)
-  - [Netlify](/integrated-exercise/walkthrough/project-planning.md)
-  - [Github Pages](/integrated-exercise/walkthrough/design.md)
-  - [Heroku](/integrated-exercise/walkthrough/frontend.md)
+  - [Vercel](/deployment-options/options/vercel.md)
+  - [Firebase](/deployment-options/options/firebase.md)
+  - [Netlify](/deployment-options/options/netlify.md)
+  - [Github Pages](/deployment-options/options/github-pages.md)
+  - [Heroku](/deployment-options/options/heroku.md)
