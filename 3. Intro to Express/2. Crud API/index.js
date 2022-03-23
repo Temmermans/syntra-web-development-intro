@@ -4,6 +4,8 @@ const HttpError = require("./errors/HttpError");
 const swaggerUi = require("swagger-ui-express");
 const swaggerDocument = require("./docs/swagger.json");
 const { readItem, readAll, writeItem, removeItem } = require("./crud");
+const jwt = require("jsonwebtoken");
+const { decode } = require("jsonwebtoken");
 
 dotenv.config();
 
@@ -11,6 +13,16 @@ const api = express();
 const port = process.env.PORT;
 
 api.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+api.get("/token", (req, res, next) => {
+  const email = req.query.email;
+
+  const token = jwt.sign(
+    { exp: Math.floor(Date.now() / 1000) + 60 * 60, email, permissions: "recipe:read" },
+    "fldkgnldfjgnldfng"
+  );
+  res.json({ token });
+});
 
 // if you want to use req.body
 api.use(express.json());
@@ -44,17 +56,36 @@ api.patch("/country/:id", (req, res, next) => {
 // 1. define get route to return countries
 // 2. Fetch data from firebase
 // 3. Return results from express
-api.get("/country", (req, res, next) => {
-  return readAll()
-    .then((val) => {
-      if (val) {
-        res.json(val);
-      } else {
-        next(new HttpError(400, "No value found for this id."));
+api.get(
+  "/country",
+  (req, res, next) => {
+    const token = req.headers.authorization?.split?.("Bearer ")?.[1];
+    jwt.verify(token, "fldkgnldfjgnldfng", (err, decoded) => {
+      if (err) {
+        next(new HttpError(401, "Unauthorized"));
       }
-    })
-    .catch((err) => next(new HttpError(500, err.message)));
-});
+      req.permissions = decoded.permissions;
+      next();
+    });
+  },
+  (req, res, next) => {
+    if (req.permissions.includes("recipe:read")) {
+      next();
+    }
+    next(new HttpError(403, "Not the correct permissions"));
+  },
+  (req, res, next) => {
+    return readAll()
+      .then((val) => {
+        if (val) {
+          res.json(val);
+        } else {
+          next(new HttpError(400, "No value found for this id."));
+        }
+      })
+      .catch((err) => next(new HttpError(500, err.message)));
+  }
+);
 
 // 1. define get route to return a specific country based on id
 // 2. Fetch data from firebase
