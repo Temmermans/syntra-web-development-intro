@@ -16,6 +16,7 @@ We suggest to create your gantt chart via the following link:
 If you do a cost estimation take the following topics into account:
 
 - Do your estimation in T-shirt sizes (xs, s, m, l, xl)
+- T-shirt size XL should be divided in smaller chuncks (more iterations)
 - Estimates are hard so make a buffer of 1,5 your estimation
 - Do not forget administration and project management tasks, often a 10% markup is taken
 - Take your time for iterations based on customer feedback, together with pro-active communication to your client. This will make sure your relation stays healthy
@@ -25,4 +26,4 @@ Deliverable can look like this:
 
 ![Gantt](../../static/cost.png)
 
-[Budget Template](../../static/Budget%20template.xlsx)
+<a href="../../static/Budget%20template.xlsx" download>Click to download our budget template</a>
