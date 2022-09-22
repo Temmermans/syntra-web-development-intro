@@ -10,13 +10,9 @@
 4. Install Postman from here: [Postman](https://www.postman.com/downloads/)
 5. Clone the github repo from [here](https://github.com/Temmermans/syntra-web-development-intro)
 
-## The overview
+## Our Calendar for this course
 
-Web development is vast, too much to see in one course. This learning path can help to position the concepts you learn about.
-
-![Frontend](./static/frontend.png)
-![Backend](./static/backend.png)
-![DevOps](./static/devops.png)
+[calendar](https://calendar.google.com/calendar/embed?src=37ebf3e2eaf1bcc0ade1641d3cf6708436ccc56e8b7e7fc37d7b7c392be2ef06%40group.calendar.google.com&ctz=Europe%2FBrussels ':include :type=iframe width=100% height=400px')
 
 Let's get started!
 
