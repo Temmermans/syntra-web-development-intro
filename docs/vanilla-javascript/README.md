@@ -150,7 +150,7 @@ let firstNum = Number(document.getElementById('firstNum').innerHTML)
 
 The docs [here](https://developer.chrome.com/docs/devtools/overview/) are great, so I'm not gonna paste it here. I still want to go through the developer tools so you now how to get the most out of them. Let us jump into the browser.
 
-> Before we get going, install the [HTML Preview](https://marketplace.visualstudio.com/items?itemName=negokaz.live-server-preview) plugin for vs code.
+> Before we get going, install the live-server npm package for easier development with `npm install -g live-server`.
 
 Let's get started!
 
