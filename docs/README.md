@@ -12,14 +12,16 @@
 
 ## Our Calendar for this course
 
-[calendar](https://calendar.google.com/calendar/embed?src=37ebf3e2eaf1bcc0ade1641d3cf6708436ccc56e8b7e7fc37d7b7c392be2ef06%40group.calendar.google.com&ctz=Europe%2FBrussels ':include :type=iframe width=100% height=400px')
+The calendar can be found in the teams channel of Syntra.
 
 Let's get started!
 
-- [Intro to Computer Science](/intro-to-computer-science/README)
-- [Vanilla Javascript](/vanilla-javascript/README)
-- [Intro to React](/intro-to-react/README)
-- [Intro to Express](/intro-to-express/README)
-- [Intro to Testing](/intro-to-testing/README)
-- [Deployment Options](/deployment-options/README)
-- [Integrated Exercise](/integrated-exercise/README)
+- [Vanilla Javascript](/vanilla-javascript/README) -> __Simon, Brecht__
+- [Intro to Computer Science](/intro-to-computer-science/README) -> __Simon__
+- [Intro to Typescript](/intro-to-typescript/README) -> __Simon__
+- [Design Patterns](/design-patterns/README) -> __Simon__
+- [Intro to React](/intro-to-react/README) -> __Brecht__
+- [Intro to Express](/intro-to-express/README) -> __Brecht__
+- [Intro to Testing](/intro-to-testing/README) -> __Will be discussed when applicable during other topics__
+- [Deployment Options](/deployment-options/README) -> __Will be discussed when applicable during other topics__
+- [Integrated Exercise](/integrated-exercise/README) -> __Brecht__
