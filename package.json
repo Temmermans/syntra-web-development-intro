@@ -1,7 +1,10 @@
 {
   "name": "intro-to-web-development",
   "version": "1.0.0",
-  "scripts": {},
+  "scripts": {
+    "serve": "docsify serve ./docs",
+    "init": "docsify init ./docs"
+  },
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",

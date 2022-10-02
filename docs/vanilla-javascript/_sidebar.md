@@ -6,6 +6,9 @@
 
 - Lessons
 
+  - [Big O](/vanilla-javascript/lessons/big-o.md)
+  - [Big O Reference](/vanilla-javascript/lessons/big-o-reference.md)
+
   - [Array Cardio 1](/vanilla-javascript/lessons/array-cardio1.md)
   - [Array Cardio 2](/vanilla-javascript/lessons/array-cardio2.md)
   - [Dev Tools Domination](/vanilla-javascript/lessons/dev-tools-domination.md)
@@ -23,3 +26,5 @@
 - Further Reading
 
   - [Caniuse](https://caniuse.com/)
+  - [Declarative vs Imperative](https://codeburst.io/declarative-vs-imperative-programming-a8a7c93d9ad2)
+  - [Big O Explained](https://www.freecodecamp.org/news/my-first-foray-into-technology-c5b6e83fe8f1/)
