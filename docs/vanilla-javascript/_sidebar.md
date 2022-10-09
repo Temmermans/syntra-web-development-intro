@@ -8,6 +8,9 @@
 
   - [Big O](/vanilla-javascript/lessons/big-o.md)
   - [Big O Reference](/vanilla-javascript/lessons/big-o-reference.md)
+  - [Promises](/vanilla-javascript/lessons/promises.md)
+
+- Practice
 
   - [Array Cardio 1](/vanilla-javascript/lessons/array-cardio1.md)
   - [Array Cardio 2](/vanilla-javascript/lessons/array-cardio2.md)
