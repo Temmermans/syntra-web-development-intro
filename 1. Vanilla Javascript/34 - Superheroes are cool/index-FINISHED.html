@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counting Events with the Count API</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <section class="hero-banner">Marvel Heros</section>
+    <section class="heroes"></section>
+
+    <script>
+      const heroes = document.querySelector(".heroes");
+      const publicKey = "fc8a583c663a38d67fb5bcef4a50674a";
+      const hash = "35915bac577ae9c71f2ea0631f1d50de";
+      const ts = 1;
+
+      function getImage(thumbnail, ext) {
+        return `${thumbnail}/portrait_xlarge.${ext}`;
+      }
+
+      function cardFactory(hero) {
+        return `
+        <section class="hero" data-hero-id=${hero.id}>
+          <img src="${getImage(hero.thumbnail.path, hero.thumbnail.extension)}" />
+          <span>${hero.name}</span>
+        </section>
+        `;
+      }
+
+      function showComics() {
+        const heroes = JSON.parse(localStorage.getItem("heroes"));
+        const clickedHero = heroes.find((hero) => hero.id === parseInt(this.dataset.heroId));
+        const comics = clickedHero.comics;
+        alert(comics.items.map((item) => item.name).join(","));
+      }
+
+      function render() {
+        return fetch(`https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`)
+          .then((res) => res.json())
+          .then((res) => res.data.results)
+          .then((res) => {
+            localStorage.setItem("heroes", JSON.stringify(res));
+            return res;
+          })
+          .then((heros) => heros.map((hero) => cardFactory(hero)))
+          .then((cards) => (heroes.innerHTML = cards.join("")))
+          .then(() => {
+            const allHeroes = document.querySelectorAll(".hero");
+            allHeroes.forEach((h) => h.addEventListener("click", showComics));
+          })
+          .catch(console.log);
+      }
+
+      render();
+    </script>
+  </body>
+</html>

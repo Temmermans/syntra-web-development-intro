@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counting Events with the Count API</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <section class="container">
+      <section id="counter">0</section>
+      <button id="count">Press Me!</button>
+    </section>
+
+    <script>
+      const button = document.getElementById("count");
+      const counter = document.getElementById("counter");
+
+      button.addEventListener("click", clicked);
+
+      function clicked() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://api.countapi.xyz/hit/simontemmerman.com/awesomeclick");
+        xhr.responseType = "json";
+        xhr.onload = function () {
+          counter.innerText = this.response.value;
+        };
+        xhr.send();
+      }
+
+      function initialClicks() {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "https://api.countapi.xyz/info/simontemmerman.com/awesomeclick");
+        xhr.responseType = "json";
+        xhr.onload = function () {
+          counter.innerText = this.response.value;
+        };
+        xhr.send();
+      }
+      initialClicks();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counting Events with the Count API</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <section class="hero">Marvel Hero</section>
+    <section class="heroes"></section>
+
+    <script>
+      // DOCS: https://developer.marvel.com/docs
+      //1. Create an account on https://developer.marvel.com/account
+      //2. Create an API Key and add valid domain *
+      //3. Store your public Api Key here
+      const ts = 1;
+      const publicKey = "";
+      //4. Get the md5 hash of ts-privateKey-publicKey via here: https://www.md5hashgenerator.com/
+      const hash = "";
+
+      //5. Create a function that takes in the thumbnail of a hero
+      // and creates a path to the full image (see here: https://developer.marvel.com/documentation/images)
+      function getImage() {}
+
+      //6. Write a function called render that
+      // a. fetch to get all the heroes from the api and displays them on the page
+      // b. Store those heroes in localStorage
+      // c. Selects all the heroes rendered and attaches a click handler that alerts the comics
+      function render() {
+        //https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}
+      }
+
+      //7. Use this factory to show the name and image of every hero you fetch
+      function cardFactory() {
+        return `
+        <section class="hero" data-hero-id="1">
+          <img src="http://i.annihil.us/u/prod/marvel/i/mg/3/20/5232158de5b16.jpg" />
+          <span>Name</span>
+        </section>
+        `;
+      }
+    </script>
+  </body>
+</html>
