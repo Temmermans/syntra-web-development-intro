@@ -24,22 +24,29 @@
       function cardFactory(hero) {
         return `
         <section class="hero" data-hero-id=${hero.id}>
-          <img src="${getImage(hero.thumbnail.path, hero.thumbnail.extension)}" />
+          <img src="${getImage(
+            hero.thumbnail.path,
+            hero.thumbnail.extension
+          )}" />
           <span>${hero.name}</span>
-          <a href="details-START.html?id=${hero.id}">Details</a>
+          <a href="details-FINISHED.html?id=${hero.id}">Details</a>
         </section>
         `;
       }
 
       function showComics() {
         const heroes = JSON.parse(localStorage.getItem("heroes"));
-        const clickedHero = heroes.find((hero) => hero.id === parseInt(this.dataset.heroId));
+        const clickedHero = heroes.find(
+          (hero) => hero.id === parseInt(this.dataset.heroId)
+        );
         const comics = clickedHero.comics;
         alert(comics.items.map((item) => item.name).join(","));
       }
 
       function render() {
-        return fetch(`https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`)
+        return fetch(
+          `https://gateway.marvel.com/v1/public/characters?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+        )
           .then((res) => res.json())
           .then((res) => res.data.results)
           .then((res) => {

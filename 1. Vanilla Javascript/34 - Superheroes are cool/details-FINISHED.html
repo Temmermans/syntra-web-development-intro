@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Hero Details</title>
+  </head>
+  <section class="hero-banner"></section>
+  <section class="heroes"></section>
+  <body>
+    <script>
+      const id = window.location.search.split("?id=")[1];
+      const heroes = JSON.parse(window.localStorage.getItem("heroes") || "[]");
+      const hero = heroes.find((hero) => hero.id === parseInt(id));
+      const banner = document.querySelector(".hero-banner");
+      const heroesDiv = document.querySelector(".heroes");
+      function getImage(thumbnail, ext) {
+        return `${thumbnail}/portrait_xlarge.${ext}`;
+      }
+      banner.innerHTML = `<div>${hero.name}</div><img src="${getImage(
+        hero.thumbnail.path,
+        hero.thumbnail.extension
+      )}" />`;
+      const playedSeries = hero.series.items;
+      console.log(playedSeries);
+      playedSeries.forEach((serie) => {
+        const serieId = serie.resourceURI.split("series/")[1];
+        const card = `
+        <section class="hero" data-hero-id=${serieId}>
+          <a href="series-FINISHED.html?id=${serieId}">${serie.name}</a>
+        </section>
+        `;
+        const element = document.createElement("div");
+        element.innerHTML = card;
+        heroesDiv.appendChild(element);
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles.css" />
+    <title>Series Details</title>
+  </head>
+  <section class="hero-banner"></section>
+  <section class="heroes"></section>
+  <body>
+    <script>
+      const heroesDiv = document.querySelector(".heroes");
+      const publicKey = "fc8a583c663a38d67fb5bcef4a50674a";
+      const hash = "35915bac577ae9c71f2ea0631f1d50de";
+      const ts = 1;
+      const id = window.location.search.split("?id=")[1];
+      fetch(
+        `https://gateway.marvel.com/v1/public/series/${id}?ts=${ts}&apikey=${publicKey}&hash=${hash}`
+      )
+        .then((res) => res.json())
+        .then((result) => result.data.results[0])
+        .then((data) => {
+          const { title, description, endYear } = data;
+          const div = document.createElement("div");
+          div.innerHTML = `
+          <h2>${title}</h2>
+          <p>${description}</p>
+          <b>${endYear}</b>
+          `;
+          heroesDiv.appendChild(div);
+        });
+    </script>
+  </body>
+</html>
