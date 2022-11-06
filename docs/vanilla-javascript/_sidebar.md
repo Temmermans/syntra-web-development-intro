@@ -9,6 +9,7 @@
   - [Big O](/vanilla-javascript/lessons/big-o.md)
   - [Big O Reference](/vanilla-javascript/lessons/big-o-reference.md)
   - [Promises](/vanilla-javascript/lessons/promises.md)
+  - [Event Loop](/vanilla-javascript/lessons/event-loop.md)
 
 - Practice
 
@@ -25,6 +26,7 @@
   - [Shift and Checkboxes](/vanilla-javascript/lessons/checkboxes.md)
   - [Speech Detection](/vanilla-javascript/lessons/speech-detection.md)
   - [Slide on Scroll](/vanilla-javascript/lessons/slide-on-scroll.md)
+  - [Wordle](/vanilla-javascript/lessons/wordle.md)
 
 - Further Reading
 
