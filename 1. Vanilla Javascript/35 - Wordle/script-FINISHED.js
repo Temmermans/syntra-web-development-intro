@@ -145,7 +145,8 @@ async function init() {
 // this uses regex (the /[a-zA-Z]/ part) but don't worry about it
 // you can learn that later and don't need it too frequently
 function isLetter(letter) {
-  return /^[a-zA-Z]$/.test(letter);
+  const regex = new RegExp(/^[a-zA-Z]$/);
+  return regex.test(letter);
 }
 
 // show the loading spinner when needed
@@ -167,6 +168,12 @@ function makeMap(array) {
     }
   }
   return obj;
+
+  // return array.reduce((acc, cv) => {
+  //   if (acc[cv]) acc[cv] = 0;
+  //   acc[cv]++;
+  //   return acc;
+  // }, {});
 }
 
 init();
