@@ -30,15 +30,14 @@
           <li class="menu-heading">
             <h3>Books</h3>
           </li>
-          <li>
-            <a href="#0">
-              <span>✅ Available books</span>
-            </a>
+          <li class="nav-selection" data-book-type="all">
+            <a href="#">📕 All books </a>
           </li>
-          <li>
-            <a href="#0">
-              <span>❌ Borrowed books</span>
-            </a>
+          <li class="nav-selection" data-book-type="available">
+            <a href="#">✅ Available books </a>
+          </li>
+          <li class="nav-selection" data-book-type="borrowed">
+            <a href="#">❌ Borrowed books </a>
           </li>
           <li>
             <div class="switch">
@@ -60,8 +59,8 @@
     </header>
     <section class="page-content">
       <section class="search-and-user">
-        <form>
-          <input type="search" placeholder="Search Pages..." />
+        <form id="search-form">
+          <input name="search" type="search" placeholder="Search Pages..." />
           <button type="submit" aria-label="submit form">
             <svg aria-hidden="true">
               <use xlink:href="#search"></use>
@@ -78,21 +77,7 @@
           </div>
         </div>
       </section>
-      <section class="grid">
-        <article class="book">
-          <img src="https://img.fruugo.com/product/4/85/75541854_max.jpg" />
-          <section>
-            <h3>Title</h3>
-            <h5>Raymond Feist</h5>
-            <p>This is a very long description detailing the book plot.</p>
-            <section>
-              <p>In Stock: <b>30</b></p>
-              <button>Collect</button>
-              <button>Return</button>
-            </section>
-          </section>
-        </article>
-      </section>
+      <section class="grid books"></section>
       <footer class="page-footer"></footer>
     </section>
 

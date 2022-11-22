@@ -3,28 +3,25 @@ class LibrarySection {
     this._books;
   }
 
-  get availableBooks() {
-    return this._books.filter((book) => {
-      return book.inStock && book.inStock >= book.reading && book.inStock >= book.borrowed;
+  search(type, term) {
+    return this[type].filter((book) => {
+      return book.title.toLowerCase().includes(term.toLowerCase());
     });
   }
 
-  get allBookedBooks() {
+  get all() {
+    return this._books;
+  }
+
+  get available() {
     return this._books.filter((book) => {
-      return book.reading;
+      return book.inStock >= book.borrowed;
     });
   }
 
-  get allBorrowedBooks() {
+  get borrowed() {
     return this._books.filter((book) => {
       return book.borrowed && book.borrowed >= book.returned;
-    });
-  }
-
-  get allReturnedBooks() {
-    // books originally borrowed
-    return this._books.filter((book) => {
-      return book.returned;
     });
   }
 
@@ -61,74 +58,177 @@ class LibrarySection {
       return "Not collected in the quantity provided";
     }
   }
-
-  // borrowing books from library
-  borrowBook(bookTitle, author) {
-    return this.collectBook(bookTitle, author, true);
-  }
-
-  // return borrowed books
-  returnBorrowedBooks(ISBN, quantity) {
-    const bookToReturn = this.allBorrowedBooks.filter((borrowedBook) => {
-      return borrowedBook.ISBN === ISBN;
-    })[0];
-
-    if (bookToReturn && quantity <= bookToReturn.borrowed) {
-      bookToReturn.inStock += quantity;
-      bookToReturn.returned += quantity;
-      bookToReturn.borrowed -= quantity;
-      return bookToReturn.bookPlacement;
-    } else {
-      return "Not borrowed in the quantity provided";
-    }
-  }
 }
 
-class ArtSection extends LibrarySection {
-  constructor() {
-    super();
+class FantasySection extends LibrarySection {
+  #app;
 
+  constructor(app) {
+    super();
+    this.#app = app;
     // accessing this array directly will lead to CONFUSION
     this._books = [
       {
-        title: "Love is bitter",
-        author: "Ariana Grande",
+        title: "Another Book",
+        author: "Raymond E. Feist",
         ISBN: 4029,
         inStock: 20,
-        bookPlacement: "Art|200|1",
+        bookPlacement: "Fantasy|200|1",
         reading: 0,
         borrowed: 0,
         returned: 0,
+        cover: "https://img.fruugo.com/product/4/85/75541854_max.jpg",
+        desc: "This is a very long description detailing the book plot.",
       },
       {
-        title: "Romeo and Juliet",
-        author: "William Shakespeare",
-        ISBN: 4129,
-        inStock: 1,
-        bookPlacement: "Art|200|2",
+        title: "The Magician",
+        author: "Raymond E. Feist",
+        ISBN: 4030,
+        inStock: 20,
+        bookPlacement: "Fantasy|200|1",
         reading: 0,
         borrowed: 0,
         returned: 0,
+        cover: "https://img.fruugo.com/product/4/85/75541854_max.jpg",
+        desc: "This is a very long description detailing the book plot.",
       },
       {
-        title: "The beauty of Art",
-        author: "John Doe",
-        ISBN: 4429,
-        inStock: 30,
-        bookPlacement: "Art|200|3",
+        title: "The Magician",
+        author: "Raymond E. Feist",
+        ISBN: 4031,
+        inStock: 18,
+        bookPlacement: "Fantasy|200|1",
         reading: 0,
-        borrowed: 0,
+        borrowed: 20,
         returned: 0,
+        cover: "https://img.fruugo.com/product/4/85/75541854_max.jpg",
+        desc: "This is a very long description detailing the book plot.",
       },
     ];
   }
 }
 
-const art = new ArtSection();
-art.collectBook("Love is Bitter", "Ariana", false, 10);
-art.returnBooks(4029, 2);
-// borrowing a book
-art.borrowBook("Love is Bitter", "Ariana Grande");
-art.borrowBook("Romeo and Juliet", "William Shakespeare");
-art.returnBorrowedBooks(4029, 1);
-console.log(art.allBookedBooks);
+class InputHandler {
+  #handlers;
+
+  constructor(handlers) {
+    this.#handlers = handlers;
+    this.#initSearch();
+    this.#initNavSelection();
+  }
+
+  #initSearch() {
+    const search = document.getElementById("search-form");
+    search.addEventListener("submit", (e) => {
+      e.preventDefault();
+      this.#handlers.search(e);
+    });
+  }
+
+  #initNavSelection() {
+    const navItems = document.querySelectorAll(".nav-selection");
+    navItems.forEach((i) => i.addEventListener("click", this.#handlers.navSelection));
+  }
+
+  initBookHandlers() {
+    const collectBooks = document.querySelectorAll(".collect");
+    const returnBooks = document.querySelectorAll(".return");
+
+    collectBooks.forEach((button) => button.addEventListener("click", console.log));
+    returnBooks.forEach((button) => button.addEventListener("click", console.log));
+  }
+}
+
+class UI {
+  #app;
+
+  constructor(app) {
+    this.#app = app;
+  }
+
+  #htmlToElement(htmlString) {
+    const template = document.createElement("template");
+    htmlString = htmlString.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = htmlString;
+    return template.content.firstChild;
+  }
+
+  #htmlToElements() {
+    const template = document.createElement("template");
+    template.innerHTML = html;
+    return template.content.childNodes;
+  }
+
+  clear(selector) {
+    const html = document.querySelector(selector);
+    let child = html.lastElementChild;
+    while (child) {
+      html.removeChild(child);
+      child = html.lastElementChild;
+    }
+  }
+
+  append(selector, html) {
+    const article = this.#htmlToElement(html);
+    return document.querySelector(selector).append(article);
+  }
+
+  bookCard(book) {
+    return `
+    <article class="book">
+      <img src="${book.cover}" />
+      <section>
+        <h3>${book.title}</h3>
+        <h5>${book.author}</h5>
+        <p>${book.desc}</p>
+        <section>
+          <p>In Stock: <b>${book.inStock}</b></p>
+          <button class="collect" data-id="${book.ISBN}">Collect</button>
+          <button class="return" data-id="${book.ISBN}">Return</button>
+        </section>
+      </section>
+    </article>
+    `;
+  }
+}
+
+class App {
+  #name;
+  #input;
+  #ui;
+  #fantasySection;
+  lookingAtBooks = "all";
+
+  constructor() {
+    this.name = "Book App";
+    this.#ui = new UI(this);
+    this.#fantasySection = new FantasySection(this);
+    this.#input = new InputHandler({
+      search: (e) => {
+        const searchTerm = e.target.querySelector("[name=search]").value;
+        this.#ui.clear(".books");
+        const books = this.#fantasySection.search(this.lookingAtBooks, searchTerm);
+        books.forEach((book) => this.#ui.append(".books", this.#ui.bookCard(book)));
+        this.#input.initBookHandlers();
+      },
+      navSelection: (e) => {
+        const type = e.target.parentNode.dataset.bookType;
+        this.lookingAtBooks = type;
+        this.#ui.clear(".books");
+        const books = this.#fantasySection[this.lookingAtBooks];
+        books.forEach((book) => this.#ui.append(".books", this.#ui.bookCard(book)));
+        this.#input.initBookHandlers();
+      },
+    });
+  }
+
+  bootstrap() {
+    const books = this.#fantasySection.all;
+    books.forEach((book) => this.#ui.append(".books", this.#ui.bookCard(book)));
+    this.#input.initBookHandlers();
+  }
+}
+
+const app = new App();
+app.bootstrap();
+console.log("App bootstrapped! 🚀");
