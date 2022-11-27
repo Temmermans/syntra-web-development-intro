@@ -24,6 +24,36 @@ class LibrarySection {
       return book.borrowed && book.borrowed >= book.returned;
     });
   }
+
+  collectBook(bookTitle, author, borrow, quantity) {
+    const titleInRegex = new RegExp(bookTitle, "gi");
+    const authorInRegex = new RegExp(author, "gi");
+    const bookToUse = this.availableBooks.filter((book) => {
+      return titleInRegex.test(book.title) && authorInRegex.test(book.author);
+    })[0];
+
+    if (bookToUse && quantity <= bookToUse.inStock) {
+      bookToUse.inStock -= quantity;
+      borrow ? (bookToUse.borrowed += 1) : (bookToUse.reading += quantity);
+      return bookToUse.bookPlacement;
+    } else {
+      return "Out of stock";
+    }
+  }
+
+  returnBooks(ISBN, quantity) {
+    const bookToReturn = this.allBookedBooks.filter((bookedBook) => {
+      return bookedBook.ISBN === ISBN;
+    })[0];
+
+    if (bookToReturn && quantity <= bookToReturn.reading) {
+      bookToReturn.inStock += quantity;
+      bookToReturn.reading -= quantity;
+      return bookToReturn.bookPlacement;
+    } else {
+      return "Not collected in the quantity provided";
+    }
+  }
 }
 
 class FantasySection extends LibrarySection {
@@ -73,47 +103,32 @@ class FantasySection extends LibrarySection {
 
 class App {
   constructor() {
+    // load in the books
     const fantasyBooks = new FantasySection();
     const state = {
       books: fantasyBooks.all,
     };
 
-    document.querySelectorAll(".nav-selection").forEach((nav) => {
-      nav.addEventListener("click", (e) => {
-        const type = e.target.parentNode.dataset.bookType;
-        this.state.books = fantasyBooks[type];
-      });
-    });
-
     this.state = new Proxy(state, {
       set: this.update,
     });
 
+    // create a BookList, pass it the state object, and add it to the DOM
     this.bookList = new BookList(this.state);
   }
 
-  update = (target, property, value) => {
-    target[property] = value;
-    if (property === "books") {
-      this.bookList.render();
-    }
-    return true;
-  };
+  update(prevState, property, value) {
+    console.log(`${JSON.stringify(prevState)} changed ${property} to ${value}`);
+  }
 }
 
 class BookList {
+  // this takes in the state and creates book items
   constructor(state) {
-    this.state = state;
+    // select the item already in the DOM to append books
+    // shoud it not exist yet, this is a good place to create it.
     this.booksContainer = document.querySelector(".books");
     for (let book of state.books) {
-      const bookInstance = new Book(book);
-      this.booksContainer.appendChild(bookInstance.el);
-    }
-  }
-
-  render() {
-    this.booksContainer.innerHTML = "";
-    for (let book of this.state.books) {
       const bookInstance = new Book(book);
       this.booksContainer.appendChild(bookInstance.el);
     }
@@ -125,13 +140,16 @@ class Book {
     this.book = book;
   }
 
+  // the el methods returns actual HTML containing the book
   get el() {
     return this.#htmlToElement(this.#bookCard(this.book));
   }
 
+  // this is a good candidate to put in its own class or module
+  // because we will need this in all the different component we have
   #htmlToElement(htmlString) {
     const template = document.createElement("template");
-    htmlString = htmlString.trim();
+    htmlString = htmlString.trim(); // Never return a text node of whitespace as the result
     template.innerHTML = htmlString;
     return template.content.firstChild;
   }
@@ -154,5 +172,3 @@ class Book {
         `;
   }
 }
-
-const app = new App();
