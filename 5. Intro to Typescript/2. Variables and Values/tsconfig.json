@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "outDir": "dist",
+    "module": "commonjs" // Node expects commonjs so we have to transform our import/export statements
+  },
+  "include": ["src/**/*"]
+}
