@@ -1,84 +1,324 @@
-## Classes
+## What is Object Oriented Programming?
 
-Before diving deeper into classes, it might be a good idea to look at prototypical inheritance in javascript.
-JavaScript is a prototype-based language, meaning object properties and methods can be shared through generalized objects that have the ability to be cloned and extended. This is known as prototypical inheritance and differs from class inheritance. Among popular object-oriented programming languages, JavaScript is relatively unique, as other prominent languages such as PHP, Python, and Java are class-based languages, which instead define classes as blueprints for objects.
+Object Oriented programming (OOP) is a programming paradigm that relies on the concept of classes and objects. It is used to structure a software program into simple, reusable pieces of code blueprints (usually called classes), which are used to create individual instances of objects.
 
-### JavaScript Prototypes
+A class is an abstract blueprint used to create more specific, concrete objects. Classes often represent broad categories, like Car or Dog that share **attributes**. These classes define what attributes an instance of this type will have, like color, but not the value of those attributes for a specific object.
 
-Every object in JavaScript has an internal property called `[[Prototype]]`. We can demonstrate this by creating a new, empty object.
+Classes can also contain functions, called **methods** available only to objects of that type. These functions are defined within the class and perform some action helpful to that specific type of object.
 
-```js
-let x = {};
-```
+Class templates are used as a blueprint to create individual **objects**. These represent specific examples of the abstract class. Each object can have unique values to the properties defined in the class.
 
-> [!NOTE]
-> This is the way we would normally create an object, but note that another way to accomplish this is with the object constructor: `let x = new Object()`.
+### Benefits of OOP
 
-> [!TIP]
-> The double square brackets that enclose `[[Prototype]]` signify that it is an internal property, and cannot be accessed directly in code.
+- OOP models complex things as reproducible, simple structures
+- Reusable, OOP objects can be used across programs
+- Allows for class-specific behavior through polymorphism
+- Easier to debug, classes often contain all applicable information to them
+- Secure, protects information through encapsulation
 
-To find the `[[Prototype]]` of this newly created object, we will use the getPrototypeOf() method.
+### How to structure OOP programs?
 
-```js
-Object.getPrototypeOf(x);
+Imagine running a dog sitting camp, with hundreds of pets, and you have to keep track of the names, ages, and days attended for each pet. How would you design simple, reusable software to model the dogs?
 
-/*
- * It is important to note that .__proto__ is a legacy feature
- * and should not be used in production code, and it is not present in every modern browser.
- */
-x.__proto__;
-```
-
-It is important that every object in JavaScript has a [[Prototype]] as it creates a way for any two or more objects to be linked. Also build in types.
-
-### Prototype Inheritance
-
-When you attempt to access a property or method of an object, JavaScript will first search on the object itself, and if it is not found, it will search the object’s `[[Prototype]]`. If after consulting both the object and its `[[Prototype]]` still no match is found, JavaScript will check the prototype of the linked object, and continue searching until the end of the prototype chain is reached.
-
-At the end of the prototype chain is `Object.prototype`. All objects inherit the properties and methods of Object. Any attempt to search beyond the end of the chain results in null.
-
-In our example, x is an empty object that inherits from Object. x can use any property or method that Object has, such as toString().
+With hundreds of dogs, it would be inefficient to write unique code for each dog. Below we see what that might look like with objects rufus and fluffy.
 
 ```js
-x.toString();
+//Object of one individual dog
+var rufus = {
+  name: "Rufus",
+  birthday: "2/1/2017",
+  age: function () {
+    return Date.now() - this.birthday;
+  },
+  attendance: 0,
+};
+
+//Object of second individual dog
+var fluffy = {
+  name: "Fluffy",
+  birthday: "1/12/2019",
+  age: function () {
+    return Date.now() - this.birthday;
+  },
+  attendance: 0,
+};
 ```
 
-Let’s look at another type of object. If you have experience Working with Arrays in JavaScript, you know they have many built-in methods, such as `pop()` and `push()`. The reason you have access to these methods when you create a new array is because any array you create has access to the properties and methods on the `Array.prototype`.
+As you can see above, there is a lot of duplicated code between both objects. **Grouping related information together** to form a class structure makes the code shorter and easier to maintain.
 
-We can test this by creating a new array.
+In the dogsitting example, here’s how a programmer could think about organizing an OOP:
+
+1. Create a parent class for all dogs as a blueprint of information and behaviors (methods) that all dogs will have, regardless of type.
+2. Create child classes to represent different subcategories of dog under the generic parent blueprint. 3. Add unique attributes and behaviors to the child classes to represent differences 4. Create objects from the child class that represent dogs within that subgroup
+
+[![](https://mermaid.ink/img/pako:eNp1kMsOwiAQRX-FzEpj-wPEZU3c65LNCNOWtIChsDC1_y59WBujrLi558wEepBOEXCQLXZdobHyaIRl6RSuYsdnnrMzeaVtlfJXcfUom20zDRn7fs6MHW7om91-jsOW-kxd4XwLJ7dOyE93s_ivHEZmtSEDQ96gVumtkyMg1GRIAE9XRSXGNggQdkTjXWGgk9LBeeAlth1lgDG4y8NK4MFHekPLly3U8ALpBmgm?type=png)](https://mermaid.live/edit#pako:eNp1kMsOwiAQRX-FzEpj-wPEZU3c65LNCNOWtIChsDC1_y59WBujrLi558wEepBOEXCQLXZdobHyaIRl6RSuYsdnnrMzeaVtlfJXcfUom20zDRn7fs6MHW7om91-jsOW-kxd4XwLJ7dOyE93s_ivHEZmtSEDQ96gVumtkyMg1GRIAE9XRSXGNggQdkTjXWGgk9LBeeAlth1lgDG4y8NK4MFHekPLly3U8ALpBmgm)
+
+### Building blocks of OOP
+
+- Classes
+- Objects
+- Methods
+- Attributes
+
+#### Classes
+
+Classes are where we create a blueprint for the structure of methods and attributes. Individual objects are instantiated, or created from this blueprint. Classes contain fields for attributes, and methods for behaviors.
 
 ```js
-let y = [];
+class Dog {
+  constructor(name, birthday) {
+    this.name = name;
+    this.birthday = birthday;
+  }
 
-y.__proto__;
+  //Declare private variables
+  _attendance = 0;
 
-const z = function () {};
+  getAge() {
+    //Getter
+    return this.calcAge();
+  }
 
-z.__proto__;
+  calcAge() {
+    //calculate age using today's date and birthday
+    return Date.now() - this.birthday;
+  }
+
+  bark() {
+    return console.log("Woof!");
+  }
+
+  updateAttendance() {
+    //add a day to the dog's attendance days at the petsitters
+    this._attendance++;
+  }
+}
 ```
 
-Every object in javascript has a hidden `[[Prototype]]` property.
+#### Objects
 
-## Now for the classes...
-
-Until recently, industrious developers used constructor functions to mimic an object-oriented design pattern in JavaScript. The language specification ECMAScript 2015, often referred to as ES6, introduced classes to the JavaScript language. Classes in JavaScript do not actually offer additional functionality, and are often described as providing “syntactical sugar” over prototypes and inheritance in that they offer a cleaner and more elegant syntax. Because other programming languages use classes, the class syntax in JavaScript makes it more straightforward for developers to move between languages.
-
-### Classes are functions
-
-A JavaScript class is a type of function. Classes are declared with the class keyword. We will use function expression syntax to initialize a function and class expression syntax to initialize a class.
+Objects are **instances of classes** created with specific data, for example in the code snippet below Rufus is an instance of the Dog class.
 
 ```js
-// Initializing a function with a function expression
-const x = function () {};
+class Dog {
+  constructor(name, birthday) {
+    this.name = name;
+    this.birthday = birthday;
+  }
 
-// Initializing a class with a class expression
-const y = class {};
+  //Declare private variables
+  _attendance = 0;
+
+  getAge() {
+    //Getter
+    return this.calcAge();
+  }
+
+  calcAge() {
+    //calculate age using today's date and birthday
+    return Date.now() - this.birthday;
+  }
+
+  bark() {
+    return console.log("Woof!");
+  }
+
+  updateAttendance() {
+    //add a day to the dog's attendance days at the petsitters
+    this._attendance++;
+  }
+}
+
+//instantiate a new object of the Dog class, and individual dog named Rufus
+const rufus = new Dog("Rufus", "2/1/2017");
 ```
 
-We can access the `[[Prototype]]` of an object using the `Object.getPrototypeOf()` method. Let’s use that to test the empty function we created.
-The code declared with function and class both return a function `[[Prototype]]`.
+#### Methods
 
-### Defining a class
+Methods represent behaviors. Methods perform actions; methods might return information about an object, or update an object’s data. The method’s code is defined in the class definition.
+
+#### Attributes
+
+Attributes are the information that is stored. Attributes are defined in the Class template. When objects are instantiated individual objects contain data stored in the Attributes field.
+
+### Four Principles of OOP
+
+- **Inheritance**: child classes inherit data and behaviors from parent class
+- **Encapsulation**: containing information in an object, exposing only selected information
+- **Abstraction**: only exposing high level public methods for accessing an object
+- **Polymorphism**: many methods can do the same task
+
+#### Inheritance
+
+Inheritance allows classes to inherit features of other classes. Put another way, parent classes extend attributes and behaviors to child classes. **Inheritance supports reusability**.
+
+The benefits of inheritance are programs can create a generic parent class, and then create more specific child classes as needed. This simplifies overall programming, because instead of recreating the structure of the Dog class multiple times, child classes automatically gain access to functionalities within their parent class.
+
+```js
+//Parent class Dog
+class Dog {
+  //Declare protected (private) fields
+  _attendance = 0;
+
+  constructor(namee, birthday) {
+    this.name = name;
+    this.birthday = birthday;
+  }
+
+  getAge() {
+    //Getter
+    return this.calcAge();
+  }
+
+  calcAge() {
+    //calculate age using today's date and birthday
+    return this.calcAge();
+  }
+
+  bark() {
+    return console.log("Woof!");
+  }
+
+  updateAttendance() {
+    //add a day to the dog's attendance days at the petsitters
+    this._attendance++;
+  }
+}
+
+//Child class HerdingDog, inherits from parent Dog
+class HerdingDog extends Dog {
+  constructor(name, birthday) {
+    super(name);
+    super(birthday);
+  }
+
+  herd() {
+    //additional method for HerdingDog child class
+    return console.log("Stay together!");
+  }
+}
+```
+
+#### Encapsulation
+
+Encapsulation means containing all important information inside an object, and only exposing selected information to the outside world. Attributes and behaviors are defined by code inside the class template.
+
+Let’s use a car as a metaphor for encapsulation. The information the car shares with the outside world, using blinkers to indicate turns, are public interfaces. In contrast, the engine is hidden under the hood.
+
+![Encap](../../static/Encapsulation.png)
+
+Encapsulation adds **security**. Attributes and methods can be set to private, so they can’t be accessed outside the class. To get information about data in an object, public methods & properties are used to access or update data.
+
+#### Abstraction
+
+Abstraction means that the user interacts with only selected attributes and methods of an object. Abstraction uses simplified, high level tools, to access a complex object.
+
+![Abstraction](../../static/abstraction.png)
+
+#### Polymorphism
+
+Polymorphism means designing objects to share behaviors. Using inheritance, objects can override shared parent behaviors, with specific child behaviors. Polymorphism allows the same method to execute different behaviors in two ways: **method overriding and method overloading**.
+
+##### Method Overriding
+
+```js
+//Parent class Dog
+class Dog{
+    //Declare protected (private) fields
+    _attendance = 0;
+
+    constructor(namee, birthday) {
+        this.name = name;
+        this.birthday = birthday;
+    }
+
+    getAge() {
+        //Getter
+        return this.calcAge();
+    }
+
+    calcAge() {
+        //calculate age using today's date and birthday
+        return this.calcAge();
+    }
+
+    bark() {
+        return console.log("Woof!");
+    }
+
+    updateAttendance() {
+        //add a day to the dog's attendance days at the petsitters
+        this._attendance++;
+    }
+}
+
+//Child class TrackingDog, inherits from parent
+class TrackingDog extends Dog {
+    constructor(name, birthday)
+        super(name);
+        super(birthday);
+    }
+
+    track() {
+        //additional method for TrackingDog child class
+        return console.log("Searching...")
+    }
+
+    bark() {
+        return console.log("Found it!");
+    }
+
+
+//instantiate a new TrackingDog object
+const duke = new TrackingDog("Duke", "1/12/2019");
+duke.bark(); //returns "Found it!"
+```
+
+##### Method Overloading
+
+```js
+//Parent class Dog
+class Dog {
+  //Declare protected (private) fields
+  _attendance = 0;
+
+  constructor(namee, birthday) {
+    this.name = name;
+    this.birthday = birthday;
+  }
+
+  getAge() {
+    //Getter
+    return this.calcAge();
+  }
+
+  calcAge() {
+    //calculate age using today's date and birthday
+    return this.calcAge();
+  }
+
+  bark() {
+    return console.log("Woof!");
+  }
+
+  updateAttendance() {
+    //add a day to the dog's attendance days at the petsitters
+    this._attendance++;
+  }
+
+  updateAttendance(x) {
+    //adds multiple to the dog's attendance days at the petsitters
+    this._attendance = this._attendance + x;
+  }
+}
+
+//instantiate a new instance of Dog class, an individual dog named Rufus
+const rufus = new Dog("Rufus", "2/1/2017");
+rufus.updateAttendance(); //attendance = 1
+rufus.updateAttendance(4); // attendance = 5
+```
+
+### Classes API Reference
 
 A constructor function is initialized with a number of parameters, which would be assigned as properties of this, referring to the function itself. The first letter of the identifier would be capitalized by convention.
 
@@ -102,22 +342,6 @@ const thor = new Hero("Thor", 4);
 ```
 
 ### Defining class methods
-
-The common practice with constructor functions is to assign methods directly to the prototype instead of in the initialization, as seen in the `greet()` method below.
-
-```js
-function Hero(name, level) {
-  this.name = name;
-  this.level = level;
-}
-
-// Adding a method to the constructor
-Hero.prototype.greet = function () {
-  return `${this.name} says hello.`;
-};
-```
-
-With classes this syntax is simplified, and the method can be added directly to the class. Using the method definition shorthand introduced in ES6, defining a method is an even more concise process.
 
 ```js
 class Hero {

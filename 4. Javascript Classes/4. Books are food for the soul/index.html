@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Books Admin Portal</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <svg style="display: none">
+      <symbol id="users" viewBox="0 0 16 16">
+        <path
+          d="M8,0a8,8,0,1,0,8,8A8,8,0,0,0,8,0ZM8,15a7,7,0,0,1-5.19-2.32,2.71,2.71,0,0,1,1.7-1,13.11,13.11,0,0,0,1.29-.28,2.32,2.32,0,0,0,.94-.34,1.17,1.17,0,0,0-.27-.7h0A3.61,3.61,0,0,1,5.15,7.49,3.18,3.18,0,0,1,8,4.07a3.18,3.18,0,0,1,2.86,3.42,3.6,3.6,0,0,1-1.32,2.88h0a1.13,1.13,0,0,0-.27.69,2.68,2.68,0,0,0,.93.31,10.81,10.81,0,0,0,1.28.23,2.63,2.63,0,0,1,1.78,1A7,7,0,0,1,8,15Z"
+        />
+      </symbol>
+      <symbol id="search" viewBox="0 0 16 16">
+        <path
+          d="M6.57,1A5.57,5.57,0,1,1,1,6.57,5.57,5.57,0,0,1,6.57,1m0-1a6.57,6.57,0,1,0,6.57,6.57A6.57,6.57,0,0,0,6.57,0Z"
+        />
+        <rect x="11.84" y="9.87" width="2" height="5.93" transform="translate(-5.32 12.84) rotate(-45)" />
+      </symbol>
+    </svg>
+    <header class="page-header">
+      <nav>
+        <a href="#0" aria-label="forecastr logo" class="logo">
+          <h2>📚 The Library</h2>
+        </a>
+        <ul class="admin-menu">
+          <li class="menu-heading">
+            <h3>Books</h3>
+          </li>
+          <li class="nav-selection" data-book-type="all">
+            <a href="#">📕 All books </a>
+          </li>
+          <li class="nav-selection" data-book-type="available">
+            <a href="#">✅ Available books </a>
+          </li>
+          <li class="nav-selection" data-book-type="borrowed">
+            <a href="#">❌ Borrowed books </a>
+          </li>
+          <li>
+            <div class="switch">
+              <input type="checkbox" id="mode" checked />
+              <label for="mode">
+                <span></span>
+                <span>Dark</span>
+              </label>
+            </div>
+            <button class="collapse-btn" aria-expanded="true" aria-label="collapse menu">
+              <svg aria-hidden="true">
+                <use xlink:href="#collapse"></use>
+              </svg>
+              <span>Collapse</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <section class="page-content">
+      <section class="search-and-user">
+        <form id="search-form">
+          <input name="search" type="search" placeholder="Search Pages..." />
+          <button type="submit" aria-label="submit form">
+            <svg aria-hidden="true">
+              <use xlink:href="#search"></use>
+            </svg>
+          </button>
+        </form>
+        <div class="admin-profile">
+          <span class="greeting">Hello admin</span>
+          <div class="notifications">
+            <span class="badge">1</span>
+            <svg>
+              <use xlink:href="#users"></use>
+            </svg>
+          </div>
+        </div>
+      </section>
+      <section class="grid books"></section>
+      <footer class="page-footer"></footer>
+    </section>
+
+    <script src="script-START.js"></script>
+  </body>
+</html>

@@ -1,6 +1,6 @@
 console.log("~~~~~~~~~~~~~~TASK 1~~~~~~~~~~~~~~");
 /**
- * Create some constructor functions and translate those to classes.
+ * Create some classes.
  * For inspiration what you can create, look around you 👀.
  * Some examples: furniture, animal, chair, teacher, student, person, tree, movie,...
  */

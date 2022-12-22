@@ -15,95 +15,88 @@
   get    - function - accepts an index and returns the value at that position
   delete - function - accepts an index, removes value from list, collapses, 
                       and returns removed value
+  exists - function - accepts a value and checks if th value is present in
+                      the linked list
                       
   I would suggest making a second class, a Node class. However that's up to you how you implement it. A Node
   has two properties, value and next.
-
-  As always, you can change describe to xdescribe to prevent the unit tests from running while
-  you work
 */
 
-class LinkedList {
+export class LinkedList {
   constructor() {
-    this.tail = this.head = null;
     this.length = 0;
+    this.head = this.tail = null;
   }
+
+  length() {
+    return this.length;
+  }
+
   push(value) {
     const node = new Node(value);
     this.length++;
     if (!this.head) {
       this.head = node;
     } else {
+      // set next on the old tail to the new node
       this.tail.next = node;
     }
     this.tail = node;
   }
-  pop() {
-    if (!this.head) return null;
-    if (this.head === this.tail) {
-      const node = this.head;
-      this.head = this.tail = null;
-      return node.value;
-    }
-    const penultimate = this._find(null, (value, nodeValue, i, current) => current.next === this.tail);
-    const ans = penultimate.next.value;
-    penultimate.next = null;
-    this.tail = penultimate;
-    this.length--;
-    return ans;
-  }
-  _find(value, test = this.test) {
-    let current = this.head;
-    let i = 0;
-    while (current) {
-      if (test(value, current.value, i, current)) {
-        return current;
-      }
-      current = current.next;
-      i++;
-    }
-    return null;
-  }
-  get(index) {
-    const node = this._find(index, this.testIndex);
-    if (!node) return null;
-    return node.value;
-  }
-  delete(index) {
-    if (index === 0) {
-      const head = this.head;
-      if (head) {
-        this.head = head.next;
-      } else {
-        this.head = null;
-      }
-      this.length--;
-      return head.value;
-    }
 
-    const node = this._find(index - 1, this.testIndex);
-    const excise = node.next;
-    if (!excise) return null;
-    node.next = excise.next;
-    if (!node.next.next) this.tail = node.next;
-    this.length--;
-    return excise.value;
-  }
-  test(search, nodeValue) {
-    return search === nodeValue;
-  }
-  testIndex(search, __, i) {
-    return search === i;
-  }
   serialize() {
-    const ans = [];
+    if (this.length === 0) return [];
+
+    const array = [];
     let current = this.head;
-    if (!current) return ans;
     while (current) {
-      ans.push(current.value);
+      array.push(current.value);
       current = current.next;
     }
-    return ans;
+    return array;
+  }
+
+  _find(index) {
+    if (index > this.length) return null;
+
+    let current = this.head;
+    for (let i = 0; i < index; i++) {
+      current = current.next;
+    }
+    return current;
+  }
+
+  get(index) {
+    return this._find(index).value;
+  }
+
+  delete(index) {
+    const deleted = this._find(index);
+    if (index === 0) {
+      // if we want to delete the head,
+      // we make the second element the new head
+      this.head = deleted.next;
+    } else {
+      const node_before_deleted_node = this._find(index - 1);
+      node_before_deleted_node.next = deleted.next;
+    }
+    this.length--;
+    return deleted.value;
+  }
+
+  pop() {
+    return this.delete(this.length - 1);
+  }
+
+  exists(value) {
+    let current = this.head;
+    let counter = 0;
+    while (current) {
+      if (current.value === value) return counter;
+      counter++;
+      current = current.next;
+    }
+    return -1;
   }
 }
 
