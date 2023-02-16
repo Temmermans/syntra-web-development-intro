@@ -7,6 +7,7 @@ function ProductForm({ product }) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
@@ -16,7 +17,7 @@ function ProductForm({ product }) {
       createProduct(data);
     }
   };
-
+  console.log(watch("file")); // watch input value by passing the name of it
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>Name: </label>
@@ -38,6 +39,7 @@ function ProductForm({ product }) {
       />
       <label>Image: </label>
       <input defaultValue={product?.image} {...register("image")} />
+      <input type="file" {...register("file")} />
 
       <input value="Submit" type="submit" />
     </form>

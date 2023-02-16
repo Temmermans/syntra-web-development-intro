@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 const Product = () => {
   const navigate = useNavigate();
-
   const { id } = useParams();
   const { products, deleteProduct } = useContext(ProductContext);
   const product = findProduct(products, id);
